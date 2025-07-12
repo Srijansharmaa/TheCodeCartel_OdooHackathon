@@ -29,7 +29,6 @@ const ProfilePage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Update the user in the auth store
       if (user) {
         const updatedUser = {
           ...user,
@@ -54,16 +53,16 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-white rounded-lg shadow">
-            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Profile</h1>
               <button
                 onClick={() => setIsEditing(!isEditing)}
                 className="flex items-center px-3 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-500"
@@ -77,16 +76,16 @@ const ProfilePage: React.FC = () => {
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Profile Picture
                     </label>
                     <div className="flex items-center space-x-4">
-                      <div className="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center">
+                      <div className="w-20 h-20 bg-indigo-100 dark:bg-indigo-400 dark:bg-opacity-20 rounded-full flex items-center justify-center">
                         <User className="w-10 h-10 text-indigo-600" />
                       </div>
                       <button
                         type="button"
-                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
                       >
                         Change Photo
                       </button>
@@ -94,7 +93,7 @@ const ProfilePage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Full Name
                     </label>
                     <input
@@ -104,12 +103,12 @@ const ProfilePage: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       disabled={!isEditing}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-50"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white disabled:bg-gray-50 dark:disabled:bg-gray-700"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Location
                     </label>
                     <div className="relative">
@@ -123,14 +122,14 @@ const ProfilePage: React.FC = () => {
                         value={formData.location}
                         onChange={handleChange}
                         disabled={!isEditing}
-                        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-50"
+                        className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white disabled:bg-gray-50 dark:disabled:bg-gray-700"
                         placeholder="Enter your location"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Bio
                     </label>
                     <textarea
@@ -140,7 +139,7 @@ const ProfilePage: React.FC = () => {
                       value={formData.bio}
                       onChange={handleChange}
                       disabled={!isEditing}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-50"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white disabled:bg-gray-50 dark:disabled:bg-gray-700"
                       placeholder="Tell us about yourself and your skills..."
                     />
                   </div>
@@ -153,9 +152,9 @@ const ProfilePage: React.FC = () => {
                         checked={formData.isPublic}
                         onChange={(e) => setFormData({ ...formData, isPublic: e.target.checked })}
                         disabled={!isEditing}
-                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 dark:border-gray-600 rounded"
                       />
-                      <span className="ml-2 text-sm text-gray-700">
+                      <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                         Make my profile public
                       </span>
                     </label>
@@ -166,7 +165,7 @@ const ProfilePage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setIsEditing(false)}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
                       >
                         Cancel
                       </button>
@@ -197,4 +196,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export default ProfilePage; 
+export default ProfilePage;

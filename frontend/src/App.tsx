@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from './stores/authStore';
@@ -18,14 +18,25 @@ import AdminRoute from './components/auth/AdminRoute';
 const App: React.FC = () => {
   const { user } = useAuthStore();
 
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    const isDark = storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <Navbar />
       <main className="flex-1">
         <AnimatePresence mode="wait">
           <Routes>
-            <Route 
-              path="/" 
+            <Route
+              path="/"
               element={
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -35,10 +46,10 @@ const App: React.FC = () => {
                 >
                   <HomePage />
                 </motion.div>
-              } 
+              }
             />
-            <Route 
-              path="/login" 
+            <Route
+              path="/login"
               element={
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -48,10 +59,10 @@ const App: React.FC = () => {
                 >
                   <LoginPage />
                 </motion.div>
-              } 
+              }
             />
-            <Route 
-              path="/register" 
+            <Route
+              path="/register"
               element={
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -61,10 +72,10 @@ const App: React.FC = () => {
                 >
                   <RegisterPage />
                 </motion.div>
-              } 
+              }
             />
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
                 <ProtectedRoute>
                   <motion.div
@@ -76,10 +87,10 @@ const App: React.FC = () => {
                     <DashboardPage />
                   </motion.div>
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/profile" 
+            <Route
+              path="/profile"
               element={
                 <ProtectedRoute>
                   <motion.div
@@ -91,10 +102,10 @@ const App: React.FC = () => {
                     <ProfilePage />
                   </motion.div>
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/browse" 
+            <Route
+              path="/browse"
               element={
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -104,10 +115,10 @@ const App: React.FC = () => {
                 >
                   <BrowsePage />
                 </motion.div>
-              } 
+              }
             />
-            <Route 
-              path="/swap-requests" 
+            <Route
+              path="/swap-requests"
               element={
                 <ProtectedRoute>
                   <motion.div
@@ -119,10 +130,10 @@ const App: React.FC = () => {
                     <SwapRequestsPage />
                   </motion.div>
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/admin" 
+            <Route
+              path="/admin"
               element={
                 <AdminRoute>
                   <motion.div
@@ -134,7 +145,7 @@ const App: React.FC = () => {
                     <AdminPage />
                   </motion.div>
                 </AdminRoute>
-              } 
+              }
             />
           </Routes>
         </AnimatePresence>
@@ -144,4 +155,5 @@ const App: React.FC = () => {
   );
 };
 
-export default App; 
+
+export default App;

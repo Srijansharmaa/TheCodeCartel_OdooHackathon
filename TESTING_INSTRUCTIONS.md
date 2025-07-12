@@ -92,3 +92,4 @@ To connect to a real backend:
 2. Update the API service to use real endpoints
 3. Configure environment variables
 4. Set up MongoDB database 
+node 

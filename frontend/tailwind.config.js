@@ -2,7 +2,9 @@
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html", // ← Add this line for safety
   ],
+  darkMode: 'class', // ← ✅ This is the key change
   theme: {
     extend: {
       colors: {
@@ -58,4 +60,4 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
   ],
-} 
+}
